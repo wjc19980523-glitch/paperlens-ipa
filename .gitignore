@@ -4,3 +4,6 @@ Payload/
 *.ipa
 .DS_Store
 xcuserdata/
+
+# XcodeGen 在构建时从 project.yml 生成，不提交
+PaperLens/Info.plist

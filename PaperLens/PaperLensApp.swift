@@ -1,25 +1,20 @@
+import SwiftData
 import SwiftUI
 
 @main
 struct PaperLensApp: App {
+    private let modelContainer: ModelContainer = {
+        do {
+            return try ModelContainer(for: Document.self)
+        } catch {
+            fatalError("无法创建本地数据库：\(error)")
+        }
+    }()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DocumentLibraryView()
         }
-    }
-}
-
-struct ContentView: View {
-    var body: some View {
-        NavigationStack {
-            VStack(spacing: 16) {
-                Image(systemName: "doc.text.magnifyingglass")
-                    .font(.system(size: 64))
-                Text("PaperLens").font(.largeTitle.bold())
-                Text("骨架工程，构建流程已打通。功能见 docs/PRD.md")
-                    .foregroundStyle(.secondary)
-            }
-            .padding()
-        }
+        .modelContainer(modelContainer)
     }
 }
